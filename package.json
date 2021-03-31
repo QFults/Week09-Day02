@@ -1,0 +1,25 @@
+{
+  "name": "Week09-Day02",
+  "version": "1.0.0",
+  "description": "- Intro to Handlebars\r - Intro to Mongoose",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QFults/Week09-Day02.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QFults/Week09-Day02/issues"
+  },
+  "homepage": "https://github.com/QFults/Week09-Day02#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.0"
+  }
+}
