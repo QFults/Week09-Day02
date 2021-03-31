@@ -1,5 +1,6 @@
 const express = require('express')
 const { join } = require('path')
+const ObjectId = require('mongojs').ObjectId
 
 const db = require('mongojs')('booksdb')
 const app = express()
@@ -39,17 +40,37 @@ app.set('view engine', '.hbs')
 //   ]
 // })
 // })
-
 app.get('/', (req, res) => {
+  res.render('search')
+})
+app.get('/books', (req, res) => {
   db.books.find({}, (err, books) => {
     if (err) { console.log(err) }
+
+    books = books.map(book => ({
+      ...book,
+      pagesLeft: book.pagecount - book.page
+    }))
+
     res.render('books', { books })
+  })
+})
+app.get('/books/:id', (req, res) => {
+  db.books.find({ _id: ObjectId(req.params.id) }, (err, books) => {
+    if (err) { console.log(err) }
+    res.render('book', { book: books[0] })
   })
 })
 app.post('/books', (req, res) => {
   db.books.insert(req.body, (err, book) => {
     if (err) { console.log(err) }
     res.json(book)
+  })
+})
+app.put('/books/:id', (req, res) => {
+  db.books.update({ _id: ObjectId(req.params.id) }, { $set: req.body }, err => {
+    if (err) { console.log(err) }
+    res.sendStatus(200)
   })
 })
 

@@ -1,29 +1,48 @@
-<form>
-  <p>
-    <label for="title">title</label>
-    <input type="text" name="title" id="title">
-  </p>
-  <p>
-    <label for="date">Date started</label>
-    <input type="text" name="date" id="date" placeholder="MM-DD-YYYY">
-  </p>
-  <p>
-    <label for="page">Current page</label>
-    <input type="number" name="page" id="page">
-  </p>
-  <p>
-    <button id="createBook">Add Book</button>
-  </p>
-</form>
-<ul id="books">
-  {{#each books as | book |}}
-  {{#with book}}
-  <li>
-    <p>{{title}}</p>
-    <p>Date started: {{date}}</p>
-    <p>Current page: {{page}}</p>
-  </li>
-  {{/with}}
-  {{/each}}
-</ul>
-<script src="./app.js"></script>
+<link rel="stylesheet" href="./books.css">
+<h1>My Reading List</h1>
+<a href="/">search</a>
+<a href="/books">view reading list</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Not Started</h1>
+      <ul id="notStarted">
+        {{#each books as | book |}}
+        {{#with book}}
+        {{#unless isStarted}}
+        <li>
+          <p>{{title}}</p>
+          <img class="cover" src="{{cover}}" alt="{{title}}">
+          <p>Date started: {{date}}</p>
+          <p>Current page: {{page}} ({{pagesLeft}} pages left)</p>
+          <a href="/books/{{_id}}" target="_blank">More Info</a>
+          <button class="startBook" data-id="{{_id}}">Start Book</button>
+          <hr>
+        </li>
+        {{/unless}}
+        {{/with}}
+        {{/each}}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h1>Started</h1>
+      <ul id="started">
+        {{#each books as | book |}}
+        {{#with book}}
+        {{#if isStarted}}
+        <li>
+          <p>{{title}}</p>
+          <img class="cover" src="{{cover}}" alt="{{title}}">
+          <p>Date started: {{date}}</p>
+          <p>Current page: <input type="number" id="page{{_id}}" value="{{page}}"> ({{pagesLeft}} pages left) <button class="updatePage" data-id="{{_id}}">Update Page</button></p>
+          <a href="/books/{{_id}}" target="_blank">More Info</a>
+          <hr>
+        </li>
+        {{/if}}
+        {{/with}}
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+</div>
+<script src="./books.js"></script>
