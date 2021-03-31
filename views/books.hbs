@@ -1,0 +1,29 @@
+<form>
+  <p>
+    <label for="title">title</label>
+    <input type="text" name="title" id="title">
+  </p>
+  <p>
+    <label for="date">Date started</label>
+    <input type="text" name="date" id="date" placeholder="MM-DD-YYYY">
+  </p>
+  <p>
+    <label for="page">Current page</label>
+    <input type="number" name="page" id="page">
+  </p>
+  <p>
+    <button id="createBook">Add Book</button>
+  </p>
+</form>
+<ul id="books">
+  {{#each books as | book |}}
+  {{#with book}}
+  <li>
+    <p>{{title}}</p>
+    <p>Date started: {{date}}</p>
+    <p>Current page: {{page}}</p>
+  </li>
+  {{/with}}
+  {{/each}}
+</ul>
+<script src="./app.js"></script>
