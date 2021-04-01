@@ -2,7 +2,7 @@ const axios = window.axios
 
 document.addEventListener('click', event => {
   if (event.target.className === 'startBook') {
-    axios.put(`/books/${event.target.dataset.id}`, {
+    axios.put(`/api/books/${event.target.dataset.id}`, {
       date: new Date(),
       isStarted: true
     })
@@ -11,7 +11,7 @@ document.addEventListener('click', event => {
       })
   } else if (event.target.className === 'updatePage') {
     const id = event.target.dataset.id
-    axios.put(`/books/${event.target.dataset.id}`, {
+    axios.put(`/api/books/${event.target.dataset.id}`, {
       page: document.getElementById(`page${id}`).value
     })
       .then(() => {

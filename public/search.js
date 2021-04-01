@@ -55,7 +55,7 @@ document.addEventListener('click', event => {
   if (event.target.className === 'addBook') {
     const { title, cover, authors, categories, description, pagecount, published } = event.target.parentNode.dataset
 
-    axios.post('/books', {
+    axios.post('/api/books', {
       title,
       cover,
       authors,
